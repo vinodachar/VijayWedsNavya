@@ -4,7 +4,7 @@ import { useInvitation } from '../../hooks/useInvitation';
 import { HeartDivider } from '../../assets/svg/Ornaments';
 
 export default function HeroSection() {
-  const { hero, couple, saveTheDate } = useInvitation();
+  const { hero, couple } = useInvitation();
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -121,44 +121,54 @@ export default function HeroSection() {
           </div>
         </div>
 
-        {/* Date */}
-        <motion.p
+        {/* Date & Event Details Card */}
+        <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.3, ease: [0.22, 1, 0.36, 1] }}
-          className="heading-display text-gold/70 text-[0.7rem] tracking-widest-3"
+          className="mt-8 max-w-sm mx-auto p-5 rounded-xl border border-gold/20 bg-ivory-warm/50 backdrop-blur-[2px] shadow-sm flex flex-col items-center gap-2"
         >
-          {saveTheDate.date}
-        </motion.p>
-
-        {/* Subline */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.6 }}
-          transition={{ duration: 0.8, delay: 1.5 }}
-          className="font-body text-charcoal/50 text-sm mt-2"
-        >
-          {hero.subline}
-        </motion.p>
+          <div className="flex flex-col gap-1 items-center">
+            <div className="flex items-center gap-2">
+              <span className="font-display text-[0.8rem] tracking-widest-2 text-gold font-semibold uppercase">15th August</span>
+              <span className="text-[0.6rem] text-charcoal/40 font-light">|</span>
+              <span className="font-body text-[0.75rem] tracking-wider text-charcoal/70 uppercase">Reception</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="font-display text-[0.8rem] tracking-widest-2 text-gold font-semibold uppercase">16th August</span>
+              <span className="text-[0.6rem] text-charcoal/40 font-light">|</span>
+              <span className="font-body text-[0.75rem] tracking-wider text-charcoal/70 uppercase">Murutham</span>
+            </div>
+          </div>
+          <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-gold/30 to-transparent my-1" />
+          <p className="font-body text-charcoal/60 text-xs tracking-wide text-center">
+            White Pearl Convention Hall, Jigani, Bangalore
+          </p>
+        </motion.div>
       </div>
 
-      {/* Scroll indicator */}
-      <motion.div
+      {/* Scroll button */}
+      <motion.button
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8, delay: 2 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+        onClick={() => {
+          document.getElementById('invitation-note')?.scrollIntoView({ behavior: 'smooth' });
+        }}
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 cursor-pointer z-20 group outline-none"
+        aria-label="Scroll down to invitation details"
       >
-        <p className="heading-display text-gold/40 text-[0.6rem] tracking-widest-3">
-          {hero.scrollLabel}
-        </p>
-        <div className="animate-chevron-bob">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-            <path d="M4,6 L10,12 L16,6" stroke="#C9A227" strokeWidth="1.5" opacity="0.5" />
-            <path d="M4,10 L10,16 L16,10" stroke="#C9A227" strokeWidth="1.5" opacity="0.3" />
-          </svg>
+        <div className="flex flex-col items-center px-6 py-2.5 rounded-full bg-maroon text-gold-light border border-gold/30 shadow-lg transition-all duration-300 hover:bg-maroon-dark hover:border-gold hover:shadow-gold-glow-sm hover:-translate-y-0.5 active:translate-y-0 active:scale-95">
+          <span className="font-display text-[0.65rem] tracking-widest-3 uppercase font-medium text-gold-light group-hover:text-white transition-colors duration-300">
+            {hero.scrollLabel}
+          </span>
+          <div className="animate-chevron-bob mt-1">
+            <svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 1L7 7L13 1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </div>
         </div>
-      </motion.div>
+      </motion.button>
     </section>
   );
 }

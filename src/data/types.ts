@@ -98,6 +98,7 @@ export interface PreWeddingEvent {
   dressColor: string;
   note?: string;
   icon?: string;
+  image?: string;
 }
 
 export interface VenueConfig {

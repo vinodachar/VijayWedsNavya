@@ -18,7 +18,7 @@ export default function PreWeddingEvents() {
         </motion.h2>
         <hr className="gold-rule mb-12" />
 
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 sm:grid-cols-2 max-w-3xl mx-auto justify-center">
           {preWeddingEvents.events.map((event, i) => (
             <motion.div
               key={i}
@@ -32,11 +32,29 @@ export default function PreWeddingEvents() {
                 boxShadow: `0 4px 20px rgba(42,27,18,0.06), inset 0 -3px 0 ${event.dressColor}30`,
               }}
             >
-              {/* Accent color top bar */}
-              <div
-                className="absolute top-0 left-0 right-0 h-1 rounded-t-xl"
-                style={{ background: event.dressColor }}
-              />
+              {/* Event Cover Image */}
+              {event.image && (
+                <div 
+                  className="relative overflow-hidden h-60 -mx-6 -mt-6 mb-5"
+                  style={{ borderBottom: `2px solid ${event.dressColor}` }}
+                >
+                  <img
+                    src={event.image}
+                    alt={event.eventName}
+                    loading="lazy"
+                    className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-charcoal/30 to-transparent" />
+                </div>
+              )}
+
+              {/* Accent color top bar (if no image) */}
+              {!event.image && (
+                <div
+                  className="absolute top-0 left-0 right-0 h-1 rounded-t-xl"
+                  style={{ background: event.dressColor }}
+                />
+              )}
 
               {/* Event icon */}
               <div className="text-3xl mb-3">{event.icon}</div>

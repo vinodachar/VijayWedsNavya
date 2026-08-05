@@ -10,7 +10,7 @@ export const invitation: InvitationData = {
     ogImage: "/assets/images/og-image.jpg",
     faviconPath: "/favicon.ico",
     whatsappPreviewText:
-      "You're invited to the marriage of Chi. Ra. Vijay Kumar B & Chi. Sou. Navya S on Sunday, 16th August 2026 at White Pearl Convention Hall, Bangalore.",
+      "You're invited to the marriage of Chi. Ra. Vijay Kumar B & Chi. Sou. Navya S on Sunday, 16th August 2026 at White Pearl Convention Hall, Jigani, Bangalore.",
   },
 
   // ── Couple Details ───────────────────────────────────────────────────
@@ -34,7 +34,7 @@ export const invitation: InvitationData = {
   hero: {
     curtainSealText: "Click to Open",
     weAreGettingMarriedLabel: "We're Getting Married",
-    subline: "16.08.2026  •  White Pearl Convention Hall, Bangalore",
+    subline: "16.08.2026  •  White Pearl Convention Hall, Jigani, Bangalore",
     dearGuestLabel: "Dear Family & Friends,",
     youAreInvitedLabel: "You Are Invited",
     scrollLabel: "Scroll",
@@ -81,8 +81,7 @@ Near Jigani Tent, Jigani, Bannerghatta Road, Anekal Tq, Bangalore 560105`,
   gallery: {
     headline: "Our Memories",
     images: [
-      { src: "/assets/images/couple-2.jpg", alt: "Vijay Kumar and Navya engagement", caption: "The Engagement Ring Ceremony" },
-      { src: "/assets/images/couple-1.jpg", alt: "Vijay Kumar and Navya groom and bride to be", caption: "Groom & Bride To Be" },
+      { src: "/assets/images/reception.jpg", alt: "Vijay Kumar and Navya engagement", caption: "The Engagement Ring Ceremony" },
     ],
   },
 
