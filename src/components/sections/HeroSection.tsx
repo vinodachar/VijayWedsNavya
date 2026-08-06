@@ -76,7 +76,7 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: 24, filter: 'blur(4px)' }}
               animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
               transition={{ duration: 0.8, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-              className="heading-script gold-text-shimmer overflow-hidden"
+              className="heading-script text-navy overflow-hidden"
               style={{ fontSize: 'clamp(2.2rem, 7vw, 3.8rem)', wordBreak: 'break-word' }}
             >
               {couple.groom.name}
@@ -95,7 +95,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 24, filter: 'blur(4px)' }}
             animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             transition={{ duration: 0.8, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="font-script text-gold text-3xl sm:text-4xl"
+            className="font-script text-navy text-3xl sm:text-4xl"
           >
             &amp;
           </motion.p>
@@ -105,7 +105,7 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: 24, filter: 'blur(4px)' }}
               animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
               transition={{ duration: 0.8, delay: 1.0, ease: [0.22, 1, 0.36, 1] }}
-              className="heading-script gold-text-shimmer overflow-hidden"
+              className="heading-script text-navy overflow-hidden"
               style={{ fontSize: 'clamp(2.2rem, 7vw, 3.8rem)', wordBreak: 'break-word' }}
             >
               {couple.bride.name}
@@ -130,19 +130,20 @@ export default function HeroSection() {
         >
           <div className="flex flex-col gap-1 items-center">
             <div className="flex items-center gap-2">
-              <span className="font-display text-[0.8rem] tracking-widest-2 text-gold font-semibold uppercase">15th August</span>
+              <span className="font-script text-gold text-2xl font-normal lowercase first-letter:uppercase">15th August</span>
               <span className="text-[0.6rem] text-charcoal/40 font-light">|</span>
               <span className="font-body text-[0.75rem] tracking-wider text-charcoal/70 uppercase">Reception</span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="font-display text-[0.8rem] tracking-widest-2 text-gold font-semibold uppercase">16th August</span>
+              <span className="font-script text-gold text-2xl font-normal lowercase first-letter:uppercase">16th August</span>
               <span className="text-[0.6rem] text-charcoal/40 font-light">|</span>
               <span className="font-body text-[0.75rem] tracking-wider text-charcoal/70 uppercase">Murutham</span>
             </div>
           </div>
           <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-gold/30 to-transparent my-1" />
-          <p className="font-body text-charcoal/60 text-xs tracking-wide text-center">
-            White Pearl Convention Hall, Jigani, Bangalore
+          <p className="font-body text-charcoal/60 text-xs tracking-wide text-center flex items-center justify-center flex-wrap gap-1">
+            <span className="font-script text-gold text-xl">White Pearl Convention Hall</span>
+            <span>, Jigani, Bangalore</span>
           </p>
         </motion.div>
       </div>

@@ -66,7 +66,7 @@ export default function Closing() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="font-script text-gold/70 text-xl sm:text-2xl mb-2"
+          className="font-script text-navy text-xl sm:text-2xl mb-2"
         >
           {closing.signOff}
         </motion.p>

@@ -184,8 +184,9 @@ export default function ScratchReveal() {
             <p className="font-body text-charcoal/60 text-sm mb-1">
               {saveTheDate.time}
             </p>
-            <p className="font-body text-charcoal/50 text-xs">
-              {saveTheDate.venueShort}
+            <p className="font-body text-charcoal/50 text-xs text-center flex items-center justify-center flex-wrap gap-1">
+              <span className="font-script text-gold text-base">White Pearl Convention Hall</span>
+              <span>, Jigani, Bangalore</span>
             </p>
           </div>
 
