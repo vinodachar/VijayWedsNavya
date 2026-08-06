@@ -158,7 +158,7 @@ export default function HeroSection() {
         className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 cursor-pointer z-20 group outline-none"
         aria-label="Scroll down to invitation details"
       >
-        <div className="flex flex-col items-center px-6 py-2.5 rounded-full bg-maroon text-gold-light border border-gold/30 shadow-lg transition-all duration-300 hover:bg-maroon-dark hover:border-gold hover:shadow-gold-glow-sm hover:-translate-y-0.5 active:translate-y-0 active:scale-95">
+        <div className="flex flex-col items-center px-6 py-2.5 rounded-full bg-navy text-gold-light border border-gold/30 shadow-lg transition-all duration-300 hover:bg-navy-dark hover:border-gold hover:shadow-gold-glow-sm hover:-translate-y-0.5 active:translate-y-0 active:scale-95">
           <span className="font-display text-[0.65rem] tracking-widest-3 uppercase font-medium text-gold-light group-hover:text-white transition-colors duration-300">
             {hero.scrollLabel}
           </span>

@@ -149,7 +149,7 @@ export const invitationHi: InvitationData = {
         date: "DD माह YYYY",
         time: "शाम 7:00 बजे",
         venue: "स्थान का नाम, शहर",
-        dressColor: "#6B1226",
+        dressColor: "#0F1E36",
         note: "अपने सबसे अच्छे कपड़े पहनें!",
         icon: "🎶",
       },
@@ -229,7 +229,7 @@ export const invitationHi: InvitationData = {
     headline: "ड्रेस कोड",
     note: "हम चाहेंगे कि आप हमारे उत्सव के रंगों को अपनाएँ। विवाह के दिन के लिए हमारे सुझाए गए रंग:",
     palette: [
-      { label: "शाही मैरून", hex: "#6B1226" },
+      { label: "शाही नेवी ब्लू", hex: "#0F1E36" },
       { label: "सोना", hex: "#C9A227" },
       { label: "आइवरी", hex: "#F6EFE3" },
       { label: "गहरा लाल", hex: "#8C1C2F" },

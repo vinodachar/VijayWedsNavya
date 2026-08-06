@@ -5,10 +5,10 @@ export default {
   theme: {
     extend: {
       colors: {
-        maroon: {
-          DEFAULT: '#6B1226',
-          dark: '#4A0D1A',
-          light: '#8C1C2F',
+        navy: {
+          DEFAULT: '#0F1E36',
+          dark: '#0A1329',
+          light: '#1F3E6C',
         },
         gold: {
           DEFAULT: '#C9A227',
@@ -24,11 +24,6 @@ export default {
         charcoal: {
           DEFAULT: '#2A1B12',
           light: '#3D2B1E',
-        },
-        velvet: {
-          DEFAULT: '#8C1C2F',
-          dark: '#5C0E1F',
-          light: '#A82D45',
         },
       },
       fontFamily: {
@@ -84,8 +79,8 @@ export default {
       backgroundImage: {
         'gold-gradient': 'linear-gradient(135deg, #E8CE86, #C9A227, #D4AF37, #E8CE86)',
         'gold-shimmer': 'linear-gradient(110deg, transparent 30%, rgba(232,206,134,0.6) 48%, rgba(201,162,39,0.8) 50%, rgba(232,206,134,0.6) 52%, transparent 70%)',
-        'velvet-left': 'linear-gradient(90deg, #5C0E1F 0%, #8C1C2F 20%, #A82D45 40%, #8C1C2F 55%, #6B1226 70%, #5C0E1F 85%, #4A0D1A 100%)',
-        'velvet-right': 'linear-gradient(90deg, #4A0D1A 0%, #5C0E1F 15%, #6B1226 30%, #8C1C2F 45%, #A82D45 60%, #8C1C2F 80%, #5C0E1F 100%)',
+        'navy-left': 'linear-gradient(90deg, #0A1329 0%, #0F1E36 20%, #1F3E6C 40%, #0F1E36 55%, #0A1329 70%, #050E24 85%, #020714 100%)',
+        'navy-right': 'linear-gradient(90deg, #020714 0%, #050E24 15%, #0A1329 30%, #0F1E36 45%, #1F3E6C 60%, #0F1E36 80%, #0A1329 100%)',
         'silk-noise': 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 256 256\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noise)\' opacity=\'0.03\'/%3E%3C/svg%3E")',
       },
       letterSpacing: {

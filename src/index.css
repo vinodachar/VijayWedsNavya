@@ -29,10 +29,9 @@
 
 /* ─── CSS Custom Properties ──────────────────────────────────────────── */
 :root {
-  --color-maroon: #6B1226;
-  --color-maroon-dark: #4A0D1A;
-  --color-velvet: #8C1C2F;
-  --color-velvet-dark: #5C0E1F;
+  --color-navy: #0F1E36;
+  --color-navy-dark: #0A1329;
+  --color-navy-light: #1F3E6C;
   --color-gold: #C9A227;
   --color-gold-light: #E8CE86;
   --color-gold-dark: #A07D1C;
@@ -175,7 +174,7 @@ body.scroll-locked {
 }
 
 .section-dark {
-  background-color: var(--color-charcoal);
+  background-color: var(--color-navy-dark);
   color: var(--color-ivory);
   position: relative;
 }
@@ -280,19 +279,19 @@ body.scroll-locked {
 .curtain-panel {
   background:
     linear-gradient(90deg,
-      rgba(92, 14, 31, 0.3) 0%,
+      rgba(10, 19, 41, 0.3) 0%,
       transparent 8%,
       transparent 15%,
-      rgba(92, 14, 31, 0.15) 20%,
+      rgba(10, 19, 41, 0.15) 20%,
       transparent 30%,
       transparent 40%,
-      rgba(92, 14, 31, 0.2) 45%,
+      rgba(10, 19, 41, 0.2) 45%,
       transparent 55%,
       transparent 65%,
-      rgba(92, 14, 31, 0.15) 70%,
+      rgba(10, 19, 41, 0.15) 70%,
       transparent 80%,
       transparent 90%,
-      rgba(92, 14, 31, 0.3) 100%
+      rgba(10, 19, 41, 0.3) 100%
     ),
     linear-gradient(180deg,
       rgba(0, 0, 0, 0.15) 0%,
@@ -303,22 +302,22 @@ body.scroll-locked {
 }
 
 .curtain-left {
-  background-color: #7A1828;
+  background-color: #0A1329;
   background-image:
     linear-gradient(90deg,
-      #5C0E1F 0%, #6B1226 10%, #8C1C2F 22%, #9E2538 35%,
-      #8C1C2F 45%, #7A1828 55%, #8C1C2F 65%, #9E2538 75%,
-      #8C1C2F 85%, #6B1226 95%, #5C0E1F 100%
+      #050E24 0%, #0A1329 10%, #0F1E36 22%, #1F3E6C 35%,
+      #0F1E36 45%, #0A1329 55%, #0F1E36 65%, #1F3E6C 75%,
+      #0F1E36 85%, #0A1329 95%, #050E24 100%
     );
 }
 
 .curtain-right {
-  background-color: #7A1828;
+  background-color: #0A1329;
   background-image:
     linear-gradient(90deg,
-      #5C0E1F 0%, #6B1226 5%, #8C1C2F 15%, #9E2538 25%,
-      #8C1C2F 35%, #7A1828 45%, #8C1C2F 55%, #9E2538 65%,
-      #8C1C2F 78%, #6B1226 90%, #5C0E1F 100%
+      #050E24 0%, #0A1329 5%, #0F1E36 15%, #1F3E6C 25%,
+      #0F1E36 35%, #0A1329 45%, #0F1E36 55%, #1F3E6C 65%,
+      #0F1E36 78%, #0A1329 90%, #050E24 100%
     );
 }
 

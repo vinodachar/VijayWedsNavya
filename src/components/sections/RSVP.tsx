@@ -145,7 +145,7 @@ export default function RSVP() {
               {/* Name */}
               <div>
                 <label htmlFor="rsvp-name" className="block font-body text-charcoal/70 text-sm mb-1.5">
-                  {rsvp.fields.name.label} {rsvp.fields.name.required && <span className="text-maroon">*</span>}
+                  {rsvp.fields.name.label} {rsvp.fields.name.required && <span className="text-red-500">*</span>}
                 </label>
                 <input
                   id="rsvp-name"
@@ -156,13 +156,13 @@ export default function RSVP() {
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   required={rsvp.fields.name.required}
                 />
-                {errors.name && <p className="text-maroon text-xs mt-1">{errors.name}</p>}
+                {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
               </div>
 
               {/* Phone */}
               <div>
                 <label htmlFor="rsvp-phone" className="block font-body text-charcoal/70 text-sm mb-1.5">
-                  {rsvp.fields.phone.label} {rsvp.fields.phone.required && <span className="text-maroon">*</span>}
+                  {rsvp.fields.phone.label} {rsvp.fields.phone.required && <span className="text-red-500">*</span>}
                 </label>
                 <input
                   id="rsvp-phone"
@@ -173,7 +173,7 @@ export default function RSVP() {
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                   required={rsvp.fields.phone.required}
                 />
-                {errors.phone && <p className="text-maroon text-xs mt-1">{errors.phone}</p>}
+                {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
               </div>
 
               {/* Email */}
@@ -194,7 +194,7 @@ export default function RSVP() {
               {/* Attending — gold pills */}
               <div>
                 <label className="block font-body text-charcoal/70 text-sm mb-2">
-                  {rsvp.fields.attending.label} {rsvp.fields.attending.required && <span className="text-maroon">*</span>}
+                  {rsvp.fields.attending.label} {rsvp.fields.attending.required && <span className="text-red-500">*</span>}
                 </label>
                 <div className="flex flex-wrap gap-2">
                   {rsvp.fields.attending.options.map((option) => (
@@ -208,7 +208,7 @@ export default function RSVP() {
                     </button>
                   ))}
                 </div>
-                {errors.attending && <p className="text-maroon text-xs mt-1">{errors.attending}</p>}
+                {errors.attending && <p className="text-red-500 text-xs mt-1">{errors.attending}</p>}
               </div>
 
               {/* Guest Count — stepper */}
