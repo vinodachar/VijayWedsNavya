@@ -389,8 +389,9 @@ export default function ScratchReveal() {
             <p className="heading-display gold-text text-[0.7rem] tracking-widest-2 mb-4">
               {saveTheDate.revealHeadline}
             </p>
-            <p className="font-script text-gold text-3xl sm:text-4xl mb-3">
-              {saveTheDate.date}
+            <p className="font-script text-3xl sm:text-4xl mb-3">
+              <span className="text-navy gold-glow-text mr-2">Sunday, 16th August</span>
+              <span className="text-gold">2026</span>
             </p>
             <p className="font-body text-charcoal/60 text-sm mb-1">
               {saveTheDate.time}
