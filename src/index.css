@@ -127,6 +127,20 @@ body.scroll-locked {
   animation: shimmer 4s ease-in-out infinite;
 }
 
+@keyframes goldTextGlow {
+  0%, 100% {
+    filter: drop-shadow(0 0 3px rgba(232, 206, 134, 0.35)) drop-shadow(0 0 8px rgba(201, 162, 39, 0.2));
+  }
+  50% {
+    filter: drop-shadow(0 0 7px rgba(232, 206, 134, 0.75)) drop-shadow(0 0 16px rgba(201, 162, 39, 0.45));
+  }
+}
+
+.gold-glow-text {
+  animation: goldTextGlow 2.5s ease-in-out infinite;
+  display: inline-block;
+}
+
 /* ─── Gold Foil Border / Divider ─────────────────────────────────────── */
 .gold-rule {
   height: 1px;
