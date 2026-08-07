@@ -130,12 +130,12 @@ export default function HeroSection() {
         >
           <div className="flex flex-col gap-1 items-center">
             <div className="flex items-center gap-2">
-              <span className="font-script text-gold text-2xl font-normal lowercase first-letter:uppercase">15th August</span>
+              <span className="font-script gold-text-shimmer text-2xl font-normal lowercase first-letter:uppercase">15th August</span>
               <span className="text-[0.6rem] text-charcoal/40 font-light">|</span>
               <span className="font-body text-[0.75rem] tracking-wider text-charcoal/70 uppercase">Reception</span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="font-script text-gold text-2xl font-normal lowercase first-letter:uppercase">16th August</span>
+              <span className="font-script gold-text-shimmer text-2xl font-normal lowercase first-letter:uppercase">16th August</span>
               <span className="text-[0.6rem] text-charcoal/40 font-light">|</span>
               <span className="font-body text-[0.75rem] tracking-wider text-charcoal/70 uppercase">Murutham</span>
             </div>
