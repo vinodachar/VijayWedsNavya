@@ -207,46 +207,57 @@ export default function CurtainGate({ onOpen }: CurtainGateProps) {
             {data.hero.youAreInvitedLabel}
           </p>
 
-          {/* Wax Seal */}
-          <button
-            onClick={handleSealClick}
-            disabled={!isComplete}
-            className={`
-              relative w-32 h-32 sm:w-36 sm:h-36 rounded-full flex items-center justify-center
-              transition-all duration-300 ease-wedding cursor-pointer
-              ${!isComplete ? 'opacity-50 cursor-not-allowed' : 'opacity-100'}
-              ${!sealPressed && isComplete ? 'animate-seal-pulse' : ''}
-            `}
-            style={{
-              background: 'radial-gradient(circle, #F6EFE3 30%, #E8CE86 60%, #C9A227 100%)',
-              boxShadow: !isComplete ? '0 4px 20px rgba(0,0,0,0.3), inset 0 2px 4px rgba(232,206,134,0.3)' : undefined,
-              transform: sealPressed
-                ? 'scale(0.94) rotate(8deg) translateY(-20px)'
-                : undefined,
-              opacity: sealPressed ? 0 : undefined,
-              transition: sealPressed
-                ? 'transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s ease 0.2s'
-                : undefined,
-            }}
-            aria-label={data.hero.curtainSealText}
-          >
-            {/* Shimmer sweep */}
-            <div
-              className="absolute inset-0 rounded-full overflow-hidden pointer-events-none"
+          {/* Wax Seal Container with Ripples */}
+          <div className="relative flex items-center justify-center">
+            {/* Pulsing Ripples */}
+            {!sealPressed && isComplete && (
+              <>
+                <div className="absolute w-40 h-40 sm:w-48 sm:h-48 rounded-full bg-gold-light/45 animate-ping pointer-events-none" style={{ animationDuration: '2.5s' }} />
+                <div className="absolute w-40 h-40 sm:w-48 sm:h-48 rounded-full bg-gold/25 animate-ping pointer-events-none" style={{ animationDuration: '2.5s', animationDelay: '1.2s' }} />
+              </>
+            )}
+
+            {/* Wax Seal */}
+            <button
+              onClick={handleSealClick}
+              disabled={!isComplete}
+              className={`
+                relative w-40 h-40 sm:w-48 sm:h-48 rounded-full flex items-center justify-center
+                transition-all duration-300 ease-wedding cursor-pointer
+                ${!isComplete ? 'opacity-50 cursor-not-allowed' : 'opacity-100'}
+                ${!sealPressed && isComplete ? 'animate-seal-pulse' : ''}
+              `}
               style={{
-                background: 'linear-gradient(110deg, transparent 30%, rgba(255,255,255,0.4) 48%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0.4) 52%, transparent 70%)',
-                backgroundSize: '200% 100%',
-                animation: isComplete ? 'shimmer 4s ease-in-out infinite' : 'none',
+                background: 'radial-gradient(circle, #F6EFE3 30%, #E8CE86 60%, #C9A227 100%)',
+                boxShadow: !isComplete ? '0 4px 20px rgba(0,0,0,0.3), inset 0 2px 4px rgba(232,206,134,0.3)' : undefined,
+                transform: sealPressed
+                  ? 'scale(0.94) rotate(8deg) translateY(-20px)'
+                  : undefined,
+                opacity: sealPressed ? 0 : undefined,
+                transition: sealPressed
+                  ? 'transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s ease 0.2s'
+                  : undefined,
               }}
-            />
-            {/* Seal ring */}
-            <div className="absolute inset-1 rounded-full border-2 border-gold/40 pointer-events-none" />
-            <div className="absolute inset-3 rounded-full border border-gold/20 pointer-events-none" />
-            {/* Seal text */}
-            <span className="font-script text-charcoal text-base relative z-10">
-              {data.hero.curtainSealText}
-            </span>
-          </button>
+              aria-label={data.hero.curtainSealText}
+            >
+              {/* Shimmer sweep */}
+              <div
+                className="absolute inset-0 rounded-full overflow-hidden pointer-events-none"
+                style={{
+                  background: 'linear-gradient(110deg, transparent 30%, rgba(255,255,255,0.4) 48%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0.4) 52%, transparent 70%)',
+                  backgroundSize: '200% 100%',
+                  animation: isComplete ? 'shimmer 4s ease-in-out infinite' : 'none',
+                }}
+              />
+              {/* Seal ring */}
+              <div className="absolute inset-1.5 rounded-full border-2 border-gold/40 pointer-events-none" />
+              <div className="absolute inset-4.5 rounded-full border border-gold/20 pointer-events-none" />
+              {/* Seal text */}
+              <span className="font-script text-charcoal text-xl sm:text-2xl relative z-10 font-semibold tracking-wide">
+                {data.hero.curtainSealText}
+              </span>
+            </button>
+          </div>
 
           {/* Hashtag */}
           <p className="heading-display text-gold-light text-[0.65rem] tracking-widest-2 mt-8 opacity-70">

@@ -36,7 +36,7 @@ export default {
         'wedding': 'cubic-bezier(0.22, 1, 0.36, 1)',
       },
       animation: {
-        'seal-pulse': 'sealPulse 2.2s ease-in-out infinite',
+        'seal-pulse': 'sealPulse 2.0s ease-in-out infinite',
         'shimmer': 'shimmer 4s ease-in-out infinite',
         'float-down': 'floatDown 5s ease-out forwards',
         'chevron-bob': 'chevronBob 2s ease-in-out infinite',
@@ -48,11 +48,11 @@ export default {
         sealPulse: {
           '0%, 100%': { 
             transform: 'scale(1)', 
-            boxShadow: '0 4px 20px rgba(0,0,0,0.3), inset 0 2px 4px rgba(232,206,134,0.3), 0 0 25px rgba(201,162,39,0.2)' 
+            boxShadow: '0 4px 25px rgba(0,0,0,0.35), inset 0 2px 6px rgba(232,206,134,0.4), 0 0 30px rgba(201,162,39,0.3)' 
           },
           '50%': { 
-            transform: 'scale(1.08)', 
-            boxShadow: '0 10px 30px rgba(0,0,0,0.4), inset 0 2px 4px rgba(232,206,134,0.4), 0 0 55px rgba(201,162,39,0.6)' 
+            transform: 'scale(1.12)', 
+            boxShadow: '0 15px 40px rgba(0,0,0,0.5), inset 0 2px 6px rgba(232,206,134,0.5), 0 0 75px rgba(201,162,39,0.8)' 
           },
         },
         shimmer: {
