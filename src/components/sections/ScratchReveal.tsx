@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useInvitation } from '../../hooks/useInvitation';
 
 interface ConfettiParticle {
-  id: number;
+  id: string | number;
   x: number;
   y: number;
   vx: number;
@@ -13,6 +13,7 @@ interface ConfettiParticle {
   rotation: number;
   rotationSpeed: number;
   opacity: number;
+  type: 'circle' | 'rect' | 'heart' | 'star';
 }
 
 const confettiColors = ['#E8CE86', '#C9A227', '#FFD700', '#F3A4B5', '#85C1E9', '#A569BD', '#52BE80'];
@@ -25,35 +26,47 @@ export default function ScratchReveal() {
   const [hasStarted, setHasStarted] = useState(false);
   const [showSparkle, setShowSparkle] = useState(false);
   const [confettiParticles, setConfettiParticles] = useState<ConfettiParticle[]>([]);
+  const [fullScreenParticles, setFullScreenParticles] = useState<ConfettiParticle[]>([]);
   const isDrawing = useRef(false);
   const lastPos = useRef({ x: 0, y: 0 });
 
-  // Animation loop for confetti falling particles
+  // Animation loop for both local and full screen confetti falling particles
   useEffect(() => {
-    if (confettiParticles.length === 0) return;
+    if (confettiParticles.length === 0 && fullScreenParticles.length === 0) return;
 
     let active = true;
     const updateFrame = () => {
       if (!active) return;
 
-      setConfettiParticles(prev => {
-        const updated = prev
+      setConfettiParticles(prev =>
+        prev
           .map(p => ({
             ...p,
             x: p.x + p.vx,
             y: p.y + p.vy,
-            vy: p.vy + 0.2, // gravity
+            vy: p.vy + 0.22, // gravity
             vx: p.vx * 0.98, // air drag
             rotation: p.rotation + p.rotationSpeed,
-            opacity: p.opacity - 0.022,
+            opacity: p.opacity - 0.02,
           }))
-          .filter(p => p.opacity > 0);
+          .filter(p => p.opacity > 0)
+      );
 
-        if (updated.length > 0) {
-          requestAnimationFrame(updateFrame);
-        }
-        return updated;
-      });
+      setFullScreenParticles(prev =>
+        prev
+          .map(p => ({
+            ...p,
+            x: p.x + p.vx,
+            y: p.y + p.vy,
+            vy: p.vy + 0.18, // gravity
+            vx: p.vx * 0.98, // air drag
+            rotation: p.rotation + p.rotationSpeed,
+            opacity: p.opacity - 0.015, // slower fade
+          }))
+          .filter(p => p.opacity > 0)
+      );
+
+      requestAnimationFrame(updateFrame);
     };
 
     const animId = requestAnimationFrame(updateFrame);
@@ -61,7 +74,7 @@ export default function ScratchReveal() {
       active = false;
       cancelAnimationFrame(animId);
     };
-  }, [confettiParticles.length]);
+  }, [confettiParticles.length, fullScreenParticles.length]);
 
   const triggerConfetti = useCallback((clientX: number, clientY: number) => {
     const container = containerRef.current;
@@ -70,24 +83,71 @@ export default function ScratchReveal() {
     const startX = clientX - rect.left;
     const startY = clientY - rect.top;
 
-    const newParticles: ConfettiParticle[] = Array.from({ length: 22 }).map((_, i) => {
-      const angle = (Math.random() * Math.PI * 1.5) - Math.PI * 0.75; // explode upwards and outwards
-      const speed = 2 + Math.random() * 7;
+    const shapes: ('circle' | 'rect' | 'heart' | 'star')[] = ['circle', 'rect', 'heart', 'star'];
+
+    const newParticles: ConfettiParticle[] = Array.from({ length: 45 }).map((_, i) => {
+      const angle = (Math.random() * Math.PI * 1.6) - Math.PI * 0.8; // explode upwards and outwards
+      const speed = 3 + Math.random() * 8;
       return {
         id: Date.now() + i + Math.random(),
         x: startX,
         y: startY,
         vx: Math.sin(angle) * speed,
-        vy: -Math.cos(angle) * speed - 2, // upward velocity
+        vy: -Math.cos(angle) * speed - 3, // upward velocity
         color: confettiColors[Math.floor(Math.random() * confettiColors.length)],
-        size: 4 + Math.random() * 7,
+        size: 5 + Math.random() * 8,
         rotation: Math.random() * 360,
-        rotationSpeed: -8 + Math.random() * 16,
+        rotationSpeed: -10 + Math.random() * 20,
         opacity: 1,
+        type: shapes[Math.floor(Math.random() * shapes.length)],
       };
     });
 
     setConfettiParticles(prev => [...prev, ...newParticles]);
+  }, []);
+
+  const triggerFullScreenConfetti = useCallback(() => {
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+    const shapes: ('circle' | 'rect' | 'heart' | 'star')[] = ['circle', 'rect', 'heart', 'star'];
+
+    const leftBlast: ConfettiParticle[] = Array.from({ length: 70 }).map((_, i) => {
+      const angle = (Math.random() * Math.PI / 4) + Math.PI / 8; // up-right
+      const speed = 12 + Math.random() * 15;
+      return {
+        id: Date.now() + i + Math.random() + 'left',
+        x: 0,
+        y: h,
+        vx: Math.cos(angle) * speed,
+        vy: -Math.sin(angle) * speed,
+        color: confettiColors[Math.floor(Math.random() * confettiColors.length)],
+        size: 6 + Math.random() * 8,
+        rotation: Math.random() * 360,
+        rotationSpeed: -10 + Math.random() * 20,
+        opacity: 1,
+        type: shapes[Math.floor(Math.random() * shapes.length)],
+      };
+    });
+
+    const rightBlast: ConfettiParticle[] = Array.from({ length: 70 }).map((_, i) => {
+      const angle = (Math.random() * Math.PI / 4) + Math.PI / 8; // up-left
+      const speed = 12 + Math.random() * 15;
+      return {
+        id: Date.now() + i + Math.random() + 'right',
+        x: w,
+        y: h,
+        vx: -Math.cos(angle) * speed,
+        vy: -Math.sin(angle) * speed,
+        color: confettiColors[Math.floor(Math.random() * confettiColors.length)],
+        size: 6 + Math.random() * 8,
+        rotation: Math.random() * 360,
+        rotationSpeed: -10 + Math.random() * 20,
+        opacity: 1,
+        type: shapes[Math.floor(Math.random() * shapes.length)],
+      };
+    });
+
+    setFullScreenParticles(prev => [...prev, ...leftBlast, ...rightBlast]);
   }, []);
 
   const CANVAS_W = 300;
@@ -204,14 +264,15 @@ export default function ScratchReveal() {
     }
 
     const pct = transparent / total;
-    if (pct > 0.55) {
+    if (pct > 0.55 && !isRevealed && !showSparkle) {
       setShowSparkle(true);
+      triggerFullScreenConfetti();
       setTimeout(() => {
         setIsRevealed(true);
         setShowSparkle(false);
       }, 600);
     }
-  }, []);
+  }, [isRevealed, showSparkle, triggerFullScreenConfetti]);
 
   const handleStart = useCallback((e: React.TouchEvent | React.MouseEvent) => {
     e.preventDefault();
@@ -263,22 +324,62 @@ export default function ScratchReveal() {
         {/* Scratch Card Container */}
         <div ref={containerRef} className="relative inline-block mx-auto">
           {/* Confetti particles */}
-          {confettiParticles.map(p => (
-            <div
-              key={p.id}
-              className="absolute rounded-sm pointer-events-none"
-              style={{
-                left: p.x,
-                top: p.y,
-                width: p.size,
-                height: p.size,
-                backgroundColor: p.color,
-                transform: `translate(-50%, -50%) rotate(${p.rotation}deg)`,
-                opacity: p.opacity,
-                zIndex: 40,
-              }}
-            />
-          ))}
+          {confettiParticles.map(p => {
+            if (p.type === 'heart') {
+              return (
+                <span
+                  key={p.id}
+                  className="absolute pointer-events-none select-none"
+                  style={{
+                    left: p.x,
+                    top: p.y,
+                    fontSize: `${p.size + 6}px`,
+                    transform: `translate(-50%, -50%) rotate(${p.rotation}deg)`,
+                    opacity: p.opacity,
+                    zIndex: 40,
+                    color: p.color,
+                  }}
+                >
+                  ♥
+                </span>
+              );
+            }
+            if (p.type === 'star') {
+              return (
+                <span
+                  key={p.id}
+                  className="absolute pointer-events-none select-none"
+                  style={{
+                    left: p.x,
+                    top: p.y,
+                    fontSize: `${p.size + 6}px`,
+                    transform: `translate(-50%, -50%) rotate(${p.rotation}deg)`,
+                    opacity: p.opacity,
+                    zIndex: 40,
+                    color: p.color,
+                  }}
+                >
+                  ★
+                </span>
+              );
+            }
+            return (
+              <div
+                key={p.id}
+                className={`absolute pointer-events-none ${p.type === 'circle' ? 'rounded-full' : 'rounded-sm'}`}
+                style={{
+                  left: p.x,
+                  top: p.y,
+                  width: p.size,
+                  height: p.size,
+                  backgroundColor: p.color,
+                  transform: `translate(-50%, -50%) rotate(${p.rotation}deg)`,
+                  opacity: p.opacity,
+                  zIndex: 40,
+                }}
+              />
+            );
+          })}
 
           {/* Hidden content underneath */}
           <div
@@ -350,7 +451,10 @@ export default function ScratchReveal() {
         {/* Accessibility fallback button */}
         {!isRevealed && (
           <button
-            onClick={() => setIsRevealed(true)}
+            onClick={() => {
+              triggerFullScreenConfetti();
+              setIsRevealed(true);
+            }}
             className="mt-6 pill-selector text-[0.65rem]"
             aria-label="Reveal the date"
           >
@@ -358,6 +462,64 @@ export default function ScratchReveal() {
           </button>
         )}
       </div>
+
+      {/* Full screen corner confetti blasts */}
+      {fullScreenParticles.map(p => {
+        if (p.type === 'heart') {
+          return (
+            <span
+              key={p.id}
+              className="fixed pointer-events-none select-none"
+              style={{
+                left: p.x,
+                top: p.y,
+                fontSize: `${p.size + 10}px`,
+                transform: `translate(-50%, -50%) rotate(${p.rotation}deg)`,
+                opacity: p.opacity,
+                zIndex: 9999,
+                color: p.color,
+              }}
+            >
+              ♥
+            </span>
+          );
+        }
+        if (p.type === 'star') {
+          return (
+            <span
+              key={p.id}
+              className="fixed pointer-events-none select-none"
+              style={{
+                left: p.x,
+                top: p.y,
+                fontSize: `${p.size + 10}px`,
+                transform: `translate(-50%, -50%) rotate(${p.rotation}deg)`,
+                opacity: p.opacity,
+                zIndex: 9999,
+                color: p.color,
+              }}
+            >
+              ★
+            </span>
+          );
+        }
+        return (
+          <div
+            key={p.id}
+            className={`fixed pointer-events-none ${p.type === 'circle' ? 'rounded-full' : 'rounded-sm'}`}
+            style={{
+              left: p.x,
+              top: p.y,
+              width: p.size,
+              height: p.size,
+              backgroundColor: p.color,
+              transform: `translate(-50%, -50%) rotate(${p.rotation}deg)`,
+              opacity: p.opacity,
+              zIndex: 9999,
+            }}
+          />
+        );
+      })}
 
       <style>{`
         @keyframes sparkle {
