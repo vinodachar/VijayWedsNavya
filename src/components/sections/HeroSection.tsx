@@ -121,31 +121,41 @@ export default function HeroSection() {
           </div>
         </div>
 
-        {/* Date & Event Details Card */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.3, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-8 max-w-sm mx-auto p-5 rounded-xl border border-gold/20 bg-ivory-warm/50 backdrop-blur-[2px] shadow-sm flex flex-col items-center gap-2"
-        >
-          <div className="flex flex-col gap-1 items-center">
-            <div className="flex items-center gap-2">
-              <span className="font-script text-navy gold-glow-text text-2xl font-semibold lowercase first-letter:uppercase">15th August</span>
-              <span className="text-[0.6rem] text-charcoal/40 font-light">|</span>
-              <span className="font-body text-[0.75rem] tracking-wider text-charcoal/70 uppercase">Reception</span>
+        {/* Date & Event Details Card Container with ambient background glow */}
+        <div className="relative mt-8 max-w-sm mx-auto w-full px-4">
+          {/* Gold ambient background glow */}
+          <div 
+            className="absolute inset-0 blur-3xl scale-125 pointer-events-none rounded-2xl" 
+            style={{
+              background: 'radial-gradient(circle, rgba(232, 206, 134, 0.28) 0%, transparent 70%)',
+            }}
+          />
+
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.3, ease: [0.22, 1, 0.36, 1] }}
+            className="relative p-5 rounded-xl border border-gold/20 bg-ivory-warm/65 backdrop-blur-[2px] shadow-sm flex flex-col items-center gap-2 gold-glow-card"
+          >
+            <div className="flex flex-col gap-1 items-center">
+              <div className="flex items-center gap-2">
+                <span className="font-script text-navy gold-glow-text text-2xl font-semibold lowercase first-letter:uppercase">15th August</span>
+                <span className="text-[0.6rem] text-charcoal/40 font-light">|</span>
+                <span className="font-body text-[0.75rem] tracking-wider text-charcoal/70 uppercase">Reception</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="font-script text-navy gold-glow-text text-2xl font-semibold lowercase first-letter:uppercase">16th August</span>
+                <span className="text-[0.6rem] text-charcoal/40 font-light">|</span>
+                <span className="font-body text-[0.75rem] tracking-wider text-charcoal/70 uppercase">Murutham</span>
+              </div>
             </div>
-            <div className="flex items-center gap-2">
-              <span className="font-script text-navy gold-glow-text text-2xl font-semibold lowercase first-letter:uppercase">16th August</span>
-              <span className="text-[0.6rem] text-charcoal/40 font-light">|</span>
-              <span className="font-body text-[0.75rem] tracking-wider text-charcoal/70 uppercase">Murutham</span>
-            </div>
-          </div>
-          <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-gold/30 to-transparent my-1" />
-          <p className="font-body text-charcoal/60 text-xs tracking-wide text-center flex items-center justify-center flex-wrap gap-1">
-            <span className="font-script text-gold text-xl">White Pearl Convention Hall</span>
-            <span>, Jigani, Bangalore</span>
-          </p>
-        </motion.div>
+            <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-gold/30 to-transparent my-1" />
+            <p className="font-body text-charcoal/60 text-xs tracking-wide text-center flex items-center justify-center flex-wrap gap-1">
+              <span className="font-script text-gold text-xl">White Pearl Convention Hall</span>
+              <span>, Jigani, Bangalore</span>
+            </p>
+          </motion.div>
+        </div>
       </div>
 
       {/* Scroll button */}
@@ -154,7 +164,7 @@ export default function HeroSection() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8, delay: 2 }}
         onClick={() => {
-          document.getElementById('invitation-note')?.scrollIntoView({ behavior: 'smooth' });
+          document.getElementById('save-the-date')?.scrollIntoView({ behavior: 'smooth' });
         }}
         className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 cursor-pointer z-20 group outline-none"
         aria-label="Scroll down to invitation details"

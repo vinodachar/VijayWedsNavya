@@ -3,7 +3,6 @@ import { LanguageProvider } from './context/LanguageContext';
 import { AudioProvider } from './context/AudioContext';
 import CurtainGate from './components/CurtainGate';
 import HeroSection from './components/sections/HeroSection';
-import InvitationNote from './components/sections/InvitationNote';
 import ScratchReveal from './components/sections/ScratchReveal';
 import Gallery from './components/sections/Gallery';
 import Countdown from './components/sections/Countdown';
@@ -56,8 +55,6 @@ function AppContent() {
         <>
           <main>
             <HeroSection />
-            <div className="jaali-divider" />
-            <InvitationNote />
             <ScratchReveal />
             <Gallery />
             <Countdown />

@@ -141,6 +141,21 @@ body.scroll-locked {
   display: inline-block;
 }
 
+@keyframes cardGoldGlow {
+  0%, 100% {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04), 0 0 12px rgba(232, 206, 134, 0.15);
+    border-color: rgba(201, 162, 39, 0.2);
+  }
+  50% {
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08), 0 0 28px rgba(232, 206, 134, 0.4);
+    border-color: rgba(201, 162, 39, 0.5);
+  }
+}
+
+.gold-glow-card {
+  animation: cardGoldGlow 3s ease-in-out infinite;
+}
+
 /* ─── Gold Foil Border / Divider ─────────────────────────────────────── */
 .gold-rule {
   height: 1px;
