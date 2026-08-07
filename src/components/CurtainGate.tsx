@@ -212,16 +212,14 @@ export default function CurtainGate({ onOpen }: CurtainGateProps) {
             onClick={handleSealClick}
             disabled={!isComplete}
             className={`
-              relative w-28 h-28 rounded-full flex items-center justify-center
+              relative w-32 h-32 sm:w-36 sm:h-36 rounded-full flex items-center justify-center
               transition-all duration-300 ease-wedding cursor-pointer
               ${!isComplete ? 'opacity-50 cursor-not-allowed' : 'opacity-100'}
-              ${sealPressed ? '' : 'animate-seal-pulse'}
+              ${!sealPressed && isComplete ? 'animate-seal-pulse' : ''}
             `}
             style={{
               background: 'radial-gradient(circle, #F6EFE3 30%, #E8CE86 60%, #C9A227 100%)',
-              boxShadow: isComplete
-                ? '0 4px 20px rgba(0,0,0,0.3), inset 0 2px 4px rgba(232,206,134,0.3), 0 0 40px rgba(201,162,39,0.2)'
-                : '0 4px 20px rgba(0,0,0,0.3), inset 0 2px 4px rgba(232,206,134,0.3)',
+              boxShadow: !isComplete ? '0 4px 20px rgba(0,0,0,0.3), inset 0 2px 4px rgba(232,206,134,0.3)' : undefined,
               transform: sealPressed
                 ? 'scale(0.94) rotate(8deg) translateY(-20px)'
                 : undefined,
@@ -229,7 +227,6 @@ export default function CurtainGate({ onOpen }: CurtainGateProps) {
               transition: sealPressed
                 ? 'transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s ease 0.2s'
                 : undefined,
-              animation: !sealPressed && isComplete ? 'sealPulse 2.6s ease-in-out infinite' : 'none',
             }}
             aria-label={data.hero.curtainSealText}
           >
