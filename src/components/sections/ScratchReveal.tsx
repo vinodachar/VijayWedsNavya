@@ -2,6 +2,21 @@ import { useRef, useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInvitation } from '../../hooks/useInvitation';
 
+interface ConfettiParticle {
+  id: number;
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  color: string;
+  size: number;
+  rotation: number;
+  rotationSpeed: number;
+  opacity: number;
+}
+
+const confettiColors = ['#E8CE86', '#C9A227', '#FFD700', '#F3A4B5', '#85C1E9', '#A569BD', '#52BE80'];
+
 export default function ScratchReveal() {
   const { saveTheDate } = useInvitation();
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -9,13 +24,76 @@ export default function ScratchReveal() {
   const [isRevealed, setIsRevealed] = useState(false);
   const [hasStarted, setHasStarted] = useState(false);
   const [showSparkle, setShowSparkle] = useState(false);
+  const [confettiParticles, setConfettiParticles] = useState<ConfettiParticle[]>([]);
   const isDrawing = useRef(false);
   const lastPos = useRef({ x: 0, y: 0 });
+
+  // Animation loop for confetti falling particles
+  useEffect(() => {
+    if (confettiParticles.length === 0) return;
+
+    let active = true;
+    const updateFrame = () => {
+      if (!active) return;
+
+      setConfettiParticles(prev => {
+        const updated = prev
+          .map(p => ({
+            ...p,
+            x: p.x + p.vx,
+            y: p.y + p.vy,
+            vy: p.vy + 0.2, // gravity
+            vx: p.vx * 0.98, // air drag
+            rotation: p.rotation + p.rotationSpeed,
+            opacity: p.opacity - 0.022,
+          }))
+          .filter(p => p.opacity > 0);
+
+        if (updated.length > 0) {
+          requestAnimationFrame(updateFrame);
+        }
+        return updated;
+      });
+    };
+
+    const animId = requestAnimationFrame(updateFrame);
+    return () => {
+      active = false;
+      cancelAnimationFrame(animId);
+    };
+  }, [confettiParticles.length]);
+
+  const triggerConfetti = useCallback((clientX: number, clientY: number) => {
+    const container = containerRef.current;
+    if (!container) return;
+    const rect = container.getBoundingClientRect();
+    const startX = clientX - rect.left;
+    const startY = clientY - rect.top;
+
+    const newParticles: ConfettiParticle[] = Array.from({ length: 22 }).map((_, i) => {
+      const angle = (Math.random() * Math.PI * 1.5) - Math.PI * 0.75; // explode upwards and outwards
+      const speed = 2 + Math.random() * 7;
+      return {
+        id: Date.now() + i + Math.random(),
+        x: startX,
+        y: startY,
+        vx: Math.sin(angle) * speed,
+        vy: -Math.cos(angle) * speed - 2, // upward velocity
+        color: confettiColors[Math.floor(Math.random() * confettiColors.length)],
+        size: 4 + Math.random() * 7,
+        rotation: Math.random() * 360,
+        rotationSpeed: -8 + Math.random() * 16,
+        opacity: 1,
+      };
+    });
+
+    setConfettiParticles(prev => [...prev, ...newParticles]);
+  }, []);
 
   const CANVAS_W = 300;
   const CANVAS_H = 360;
 
-  // Initialize canvas with gold foil
+  // Initialize canvas with navy blue foil
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas || isRevealed) return;
@@ -26,13 +104,13 @@ export default function ScratchReveal() {
     canvas.width = CANVAS_W;
     canvas.height = CANVAS_H;
 
-    // Draw gold foil background as heart-ish rounded shape
+    // Draw navy blue gradient background as heart-ish rounded shape
     const gradient = ctx.createLinearGradient(0, 0, CANVAS_W, CANVAS_H);
-    gradient.addColorStop(0, '#E8CE86');
-    gradient.addColorStop(0.3, '#C9A227');
-    gradient.addColorStop(0.5, '#D4AF37');
-    gradient.addColorStop(0.7, '#C9A227');
-    gradient.addColorStop(1, '#E8CE86');
+    gradient.addColorStop(0, '#1F3E6C');
+    gradient.addColorStop(0.3, '#0F1E36');
+    gradient.addColorStop(0.5, '#0A1329');
+    gradient.addColorStop(0.7, '#0F1E36');
+    gradient.addColorStop(1, '#1F3E6C');
 
     // Heart-shaped clip path
     ctx.beginPath();
@@ -55,7 +133,7 @@ export default function ScratchReveal() {
 
     // Add "Save the Date" text
     ctx.globalCompositeOperation = 'source-over';
-    ctx.fillStyle = '#2A1B12';
+    ctx.fillStyle = '#E8CE86';
     ctx.font = '700 14px Marcellus, serif';
     ctx.textAlign = 'center';
     ctx.letterSpacing = '4px';
@@ -63,6 +141,7 @@ export default function ScratchReveal() {
 
     // Small scratch icon hint
     ctx.font = '24px sans-serif';
+    ctx.fillStyle = '#E8CE86';
     ctx.fillText('✨', cx, CANVAS_H / 2 + 25);
   }, [isRevealed, saveTheDate.scratchLabel]);
 
@@ -138,10 +217,23 @@ export default function ScratchReveal() {
     e.preventDefault();
     isDrawing.current = true;
     setHasStarted(true);
+
+    // Trigger paper pops confetti at cursor position
+    let clientX = 0;
+    let clientY = 0;
+    if ('touches' in e && e.touches.length > 0) {
+      clientX = e.touches[0].clientX;
+      clientY = e.touches[0].clientY;
+    } else if ('clientX' in e) {
+      clientX = (e as React.MouseEvent).clientX;
+      clientY = (e as React.MouseEvent).clientY;
+    }
+    triggerConfetti(clientX, clientY);
+
     const pos = getCanvasPos(e);
     lastPos.current = pos;
     scratch(pos.x, pos.y);
-  }, [getCanvasPos, scratch]);
+  }, [getCanvasPos, scratch, triggerConfetti]);
 
   const handleMove = useCallback((e: React.TouchEvent | React.MouseEvent) => {
     e.preventDefault();
@@ -170,6 +262,24 @@ export default function ScratchReveal() {
 
         {/* Scratch Card Container */}
         <div ref={containerRef} className="relative inline-block mx-auto">
+          {/* Confetti particles */}
+          {confettiParticles.map(p => (
+            <div
+              key={p.id}
+              className="absolute rounded-sm pointer-events-none"
+              style={{
+                left: p.x,
+                top: p.y,
+                width: p.size,
+                height: p.size,
+                backgroundColor: p.color,
+                transform: `translate(-50%, -50%) rotate(${p.rotation}deg)`,
+                opacity: p.opacity,
+                zIndex: 40,
+              }}
+            />
+          ))}
+
           {/* Hidden content underneath */}
           <div
             className="w-[300px] h-[360px] flex flex-col items-center justify-center rounded-2xl border border-gold/20 bg-ivory-warm"
